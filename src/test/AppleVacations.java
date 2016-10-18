@@ -4,10 +4,15 @@ import org.testng.annotations.Test;
 
 import pagefactory.HomePage;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,21 +30,42 @@ public class AppleVacations {
 	  
 	  Setup setup = new Setup();
 	  driver = setup.DefineBrowser("chrome");
+	  objHomePage = new HomePage(driver);
 	  
   }
-	
+	//launch site
   @Test
   public void launchSite() {
 	  driver.get("http://www.applevacations.com/");
 	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
   }
   
+  //click x on overlay window to close
   @Test
   public void clickOverlayWindow(){
-	  objHomePage = new HomePage(driver);
+	  
 	  objHomePage.overlayWindowObject().click();  
   }
   
+  //assert logo exists
+  @Test
+  public void assertLogo(){
+ 
+      Boolean imageLoaded = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", objHomePage.appleLogo());
+  }
+  
+  //assert header links
+  @Test
+  public void assertHeaderLinks(){
+	  
+	  WebElement why_appleLink = objHomePage.why_appleLink();
+	  String bodyText = why_appleLink.getText();
+	  Assert.assertEquals(true, bodyText.contains("Why Apple"));
+	  Assert.assertEquals(true, why_appleLink.isDisplayed());
+	  
+  }
+  
+  //assert page title for home page
   @Test  
   public void assertPageTitle(){
 	  
@@ -51,6 +77,7 @@ public class AppleVacations {
 	  
   }
   
+  //fill in departing city text box and choose dynamic drop down option
   @Test
   public void sendDepartingCity() throws InterruptedException{
 
@@ -60,11 +87,13 @@ public class AppleVacations {
       dpc.clear();
       dpc.sendKeys("New York");
   	  TimeUnit.SECONDS.sleep(1);
+  	  //drop down is hidden so can't use drop down selector :(
   	  dpc.sendKeys(Keys.DOWN);
   	  dpc.sendKeys(Keys.RETURN);
 
   }
   
+  //fill in arriving city text box and choose dynamic drop down option
   @Test
   public void sendArrivingCity() throws InterruptedException{
 
@@ -72,12 +101,14 @@ public class AppleVacations {
       Actions Actions = new Actions(driver);
       Actions.moveToElement(avc).click().perform();
       avc.clear();
-      avc.sendKeys("Mexico-Cancun/Riviera Maya");
-  	  TimeUnit.SECONDS.sleep(1);
+      avc.sendKeys("Mexico-Cancun");
+      TimeUnit.SECONDS.sleep(1);     
+      //drop down is hidden so can't use drop down selector :(
   	  avc.sendKeys(Keys.DOWN);
   	  avc.sendKeys(Keys.RETURN);
   }
   
+  //fill in departing date text box, ignoring calendar selector
   @Test
   public void sendDepartingDate() throws InterruptedException{
 		
@@ -91,7 +122,7 @@ public class AppleVacations {
       	TimeUnit.SECONDS.sleep(1);
 
   }
-  
+  //fill in returning date text box, ignoring calendar selector
   @Test
   public void sendReturningDate() throws InterruptedException{
 
@@ -106,6 +137,7 @@ public class AppleVacations {
   
   }
   
+  //click search now button to initiate search
   @Test
   public void clickSearchNow() throws InterruptedException{
 
@@ -115,6 +147,7 @@ public class AppleVacations {
 	  	TimeUnit.SECONDS.sleep(1);
   }
   
+  //assert that results page title is correct
   @Test
   public void assertSearchResultPageTitle() throws InterruptedException{
 
@@ -126,6 +159,7 @@ public class AppleVacations {
 	  	TimeUnit.SECONDS.sleep(1);
   }
   
+  //shut down browser(s) and end test
   @AfterSuite(alwaysRun=true)
   public void destroyBrowsers() {
 	try {

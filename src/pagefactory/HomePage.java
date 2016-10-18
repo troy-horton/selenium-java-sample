@@ -26,6 +26,25 @@ public class HomePage {
     	
     }
     
+    @FindBy(css="#header_avlogo > a > img")
+    WebElement appleLogo;
+    
+    public WebElement appleLogo(){
+    	
+    	return appleLogo;
+    	
+    } 
+    
+    @FindBy(css="#h_hp_bar > span:nth-child(1) > a")
+    WebElement why_appleLink;
+    
+    public WebElement why_appleLink (){
+    	
+    	return why_appleLink;
+    	
+    } 
+    
+    
     @FindBy(css="#selectedGatewayTemp")
     WebElement departingCity;
     
@@ -36,6 +55,7 @@ public class HomePage {
     }   
 
     @FindBy(css="#selectedDestinationTemp")
+    //@FindBy(css="#selectedDestination")
     WebElement arrivingCity;
     
     public WebElement arrivingCityObject(){

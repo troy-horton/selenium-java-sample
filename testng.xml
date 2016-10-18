@@ -7,6 +7,8 @@
           <include name="launchSite" />
           <include name="clickOverlayWindow" />
           <include name="assertPageTitle" />
+          <include name="assertLogo" />  
+          <include name="assertHeaderLinks" />                            
           <include name="sendDepartingCity" />
           <include name="sendArrivingCity" />
           <include name="sendDepartingDate" />
