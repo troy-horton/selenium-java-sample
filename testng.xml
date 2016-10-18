@@ -1,0 +1,20 @@
+<suite name="test Suite" verbose="10">
+ 
+  <test name="Write new post" preserve-order="true">
+    <classes>
+      <class name="test.AppleVacations">
+        <methods>
+          <include name="launchSite" />
+          <include name="clickOverlayWindow" />
+          <include name="assertPageTitle" />
+          <include name="sendDepartingCity" />
+          <include name="sendArrivingCity" />
+          <include name="sendDepartingDate" />
+          <include name="sendReturningDate" />          
+          <include name="clickSearchNow" />
+          <include name="assertSearchResultPageTitle" />
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>
