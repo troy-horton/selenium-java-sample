@@ -5,11 +5,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import java.util.concurrent.TimeUnit;
 
 public class Setup {
-    WebDriver driver = null;
-    public WebDriver DefineBrowser(String browser)
+	
+    public WebDriver driver;
+    
+    //initialize driver for browser
+    public void DefineBrowser(String browser)
     {
         switch (browser)
         {        
@@ -18,7 +20,6 @@ public class Setup {
                 driver = new FirefoxDriver();
                 break;
             }
-
             case "chrome":
             {  
             	String chromepath = "/Users/troyhorton/Documents/workspace/SeleniumTest/chromedriver";
@@ -39,9 +40,6 @@ public class Setup {
                 break;
             }                
         }
-        
-        return driver;
-    }
-    
 
+    }
 }

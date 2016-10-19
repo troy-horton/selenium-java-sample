@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+//contains all the asserts for the search results page
 public class SearchResultsAsserts {
 	WebDriver driver;
 	HomePage objHomePage;
@@ -16,6 +17,7 @@ public class SearchResultsAsserts {
 		 
 	 }
 	
+	 //asserts the search results page title is correct
 	public void assertSearchResultsTitle() throws InterruptedException{
 	
 	    (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {

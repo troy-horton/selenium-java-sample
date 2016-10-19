@@ -9,6 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import pagefactory.HomePage;
 import test.FormData;
 
+//contains all the logic for home page navigation and manipulating objects
 public class HomePageEngine {
 	
 	WebDriver driver;
@@ -19,68 +20,77 @@ public class HomePageEngine {
 		this.driver = driver;
 		this.objHomePage = objHomePage;
 		this.fd = fd;
+		fd.Dates();
 	}
 	
+	//launches the home page
     public void launchSite(){
+    	
   	  String website = "http://www.applevacations.com/";
   	  driver.get(website);
   	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+  	  
+    }
+    //navigates city elements
+    private void cityNav(WebElement we,String city) throws InterruptedException{
+    	
+		Actions Actions = new Actions(driver);
+		Actions.moveToElement(we).click().perform();
+		we.clear();
+		we.sendKeys(city);
+		TimeUnit.SECONDS.sleep(1);
+		//drop down is hidden so can't use drop down selector :(
+		we.sendKeys(Keys.DOWN);
+		we.sendKeys(Keys.RETURN);
+    	
     }
     
+    //fills in departing city text box
     public void departingCity() throws InterruptedException{
     	
   	  WebElement dpc = objHomePage.departingCityObject();
-      Actions Actions = new Actions(driver);
-      Actions.moveToElement(dpc).click().perform();
-      dpc.clear();
-      dpc.sendKeys("New York");
-  	  TimeUnit.SECONDS.sleep(1);
-  	  //drop down is hidden so can't use drop down selector :(
-  	  dpc.sendKeys(Keys.DOWN);
-  	  dpc.sendKeys(Keys.RETURN);
+  	  String city = "New York";
+  	  cityNav(dpc,city);
     	
     }
 
+    //fills in arriving city text box
     public void arrivingCity() throws InterruptedException{
     	
   	  WebElement avc = objHomePage.arrivingCityObject();
-      Actions Actions = new Actions(driver);
-      Actions.moveToElement(avc).click().perform();
-      avc.clear();
-      avc.sendKeys("Mexico-Cancun");
-      TimeUnit.SECONDS.sleep(1);     
-      //drop down is hidden so can't use drop down selector :(
-  	  avc.sendKeys(Keys.DOWN);
-  	  avc.sendKeys(Keys.RETURN);
+  	  String city = "Mexico-Cancun";
+  	  cityNav(avc,city);
   	  
     }
     
-    public void departingDate() throws InterruptedException {
+    //navigates calendar elements
+    private void calendarNav(String date, WebElement we) throws InterruptedException{
     	
-	  	fd.FormatDates();
-		String startDate = fd.startDateString;
-		WebElement dep = objHomePage.departingDateObject();
 		Actions Actions = new Actions(driver);
-		Actions.moveToElement(dep).click().perform();
-		dep.clear();
-		dep.sendKeys(startDate);
+		Actions.moveToElement(we).click().perform();
+		we.clear();
+		we.sendKeys(date);
       	TimeUnit.SECONDS.sleep(1);
-    	
     }
     
+    //fills in departing date text box
+    public void departingDate() throws InterruptedException {
+	  	
+		String startDate = fd.startDateString;
+		WebElement dep = objHomePage.departingDateObject();
+		calendarNav(startDate,dep);
+    	
+    }
+    //fills in returning date text box
     public void returningDate() throws InterruptedException {
     	
-		fd.FormatDates();
 		String endDate = fd.endDateString;   
 		WebElement ret = objHomePage.returningDateObject();
-		Actions Actions = new Actions(driver);
-		Actions.moveToElement(ret).click().perform();
-		ret.clear();
-		ret.sendKeys(endDate);
-		TimeUnit.SECONDS.sleep(1);
+		calendarNav(endDate,ret);
     	
     }    
     
+    //clicks search now button
     public void searchNow() throws InterruptedException {
     	
 	  	WebElement searchNow = objHomePage.searchNowObject();

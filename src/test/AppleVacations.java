@@ -1,7 +1,6 @@
 package test;
 
 import org.testng.annotations.Test;
-
 import pagefactory.HomePage;
 import pageengine.HomePageAsserts;
 import pageengine.HomePageEngine;
@@ -11,23 +10,23 @@ import org.testng.annotations.BeforeSuite;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 
-
-
 public class AppleVacations {
+	
 	WebDriver driver;
 	Setup setup;
 	HomePage objHomePage;
 	HomePageEngine objHomePageEngine;
 	HomePageAsserts objHomePageAsserts;
 	SearchResultsAsserts objSearchResultsAsserts;
-	FormData fd = new FormData();
-
+	FormData fd;
 	
   @BeforeSuite(alwaysRun=true)
   public void launchBrowser() {
 	  
 	  Setup setup = new Setup();
-	  driver = setup.DefineBrowser("chrome");
+	  setup.DefineBrowser("chrome");
+	  driver = setup.driver;
+	  fd = new FormData();
 	  objHomePage = new HomePage(driver);
 	  objHomePageEngine = new HomePageEngine(driver, objHomePage,fd);
 	  objHomePageAsserts = new HomePageAsserts(driver, objHomePage);

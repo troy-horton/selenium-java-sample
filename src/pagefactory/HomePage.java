@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+//contains all the page objects for the home page
 public class HomePage {
 	
     WebDriver driver;
@@ -17,7 +18,7 @@ public class HomePage {
 
     }
     
-    
+    //overlay window page object
     @FindBy(css="#monetate_lightbox_contentMap > area:nth-child(1)")
     WebElement overlayWindow;
     
@@ -27,6 +28,7 @@ public class HomePage {
     	
     }
     
+    //apple loge page object
     @FindBy(css="#header_avlogo > a > img")
     WebElement appleLogo;
     
@@ -36,6 +38,7 @@ public class HomePage {
     	
     } 
     
+    //"why apple" header link object
     @FindBy(css="#h_hp_bar > span:nth-child(1) > a")
     WebElement why_appleLink;
     
@@ -45,7 +48,7 @@ public class HomePage {
     	
     } 
     
-    
+    //departing city textbox object
     @FindBy(css="#selectedGatewayTemp")
     WebElement departingCity;
     
@@ -55,6 +58,7 @@ public class HomePage {
     	
     }   
 
+    //arriving city textbox object
     @FindBy(css="#selectedDestinationTemp")
     //@FindBy(css="#selectedDestination")
     WebElement arrivingCity;
@@ -65,6 +69,7 @@ public class HomePage {
     	
     }  
     
+    //departing date textbox object
     @FindBy(css="#goingtodate")
     WebElement departingDate;
     
@@ -74,6 +79,7 @@ public class HomePage {
     	
     } 
     
+    //returning date textbox object
     @FindBy(css="#returndate")
     WebElement returningDate;
     
@@ -83,6 +89,7 @@ public class HomePage {
     	
     }   
     
+    //search now button object
     @FindBy(css="#vacationPkgs > div:nth-child(12) > div > a")
     WebElement searchNow;
     

@@ -6,7 +6,7 @@ public class test {
 		// TODO Auto-generated method stub
 		
 		FormData fd = new FormData();
-		fd.FormatDates();
+		fd.Dates();
 		String sd = fd.startDateString;
 		System.out.println(sd);
 

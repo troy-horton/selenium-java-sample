@@ -9,17 +9,19 @@ public class FormData {
 	public static java.util.Date endDate;
 	public String startDateString;
 	public String endDateString;
-
-   public void FormatDates() {
+	
+	//get start and end date and format them to strings
+   public void Dates() {
 
 	    SimpleDateFormat dateInput = new SimpleDateFormat ("MMddyyyy");
-	    Dates();
+	    getDates();
 	    startDateString = dateInput.format(startDate);
 	    endDateString = dateInput.format(endDate);
 
    }
    
-   private static void Dates() {	   
+   //get date 3 months for now for start date and then add 7 days for end date
+   private static void getDates() {	   
       
 	      Calendar cal = Calendar.getInstance(); 
 	      cal.add(Calendar.MONTH, 3);
