@@ -7,8 +7,8 @@ public class FormData {
 
 	public static java.util.Date startDate;
 	public static java.util.Date endDate;
-	String startDateString;
-	String endDateString;
+	public String startDateString;
+	public String endDateString;
 
    public void FormatDates() {
 
